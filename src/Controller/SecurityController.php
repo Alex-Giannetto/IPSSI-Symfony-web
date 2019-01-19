@@ -5,6 +5,8 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Form\LoginType;
 use App\Form\UserRegisterType;
+use App\Form\UserUpdateInfoType;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -21,7 +23,6 @@ class SecurityController extends AbstractController
     {
         $user = new User();
         $form = $this->createForm(LoginType::class, $user);
-//
         $form->handleRequest($request);
         return $this->render('security/login.html.twig', [
             'error' => $authenticationUtils->getLastAuthenticationError(),
@@ -52,4 +53,43 @@ class SecurityController extends AbstractController
             'form' => $form->createView()
         ]);
     }
+
+    /**
+     * @Route("/profile", name="profile")
+     */
+    public function profile(Request $request, EntityManagerInterface $entityManager)
+    {
+        $user = $this->getUser();
+        $form = $this->createForm(UserUpdateInfoType::class, $user);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->persist($user);
+            $entityManager->flush();
+            return $this->redirectToRoute('/');
+        }
+
+        return $this->render('security/profile.html.twig', [
+            'form' => $form->createView()
+        ]);
+    }
+
+    /**
+     * @Route("/admin/users/", name="listeUser")
+     */
+    public function users(Request $request, EntityManagerInterface $entityManager)
+    {
+        $user = $this->getUser();
+        $form = $this->createForm(UserUpdateInfoType::class, $user);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->persist($user);
+            $entityManager->flush();
+            return $this->redirectToRoute('/');
+        }
+
+        return $this->render('security/profile.html.twig', [
+            'form' => $form->createView()
+        ]);
+    }
+
 }
