@@ -40,7 +40,7 @@ class User implements UserInterface
     private $lastname;
 
     /**
-     * @ORM\Column(type="date", nullable=true)
+     * @ORM\Column(type="datetime", nullable=true)
      */
     private $birthdate;
 

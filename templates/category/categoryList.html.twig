@@ -1,0 +1,13 @@
+{% extends 'category/index.html.twig' %}
+
+{% block container %}
+    <a href="{{ path('admin_addCategory') }}">New</a><br><br>
+
+    <ul>
+        {% for category in categories %}
+            <li>
+                <a href="{{ path('admin_category', {id: category.id}) }}">{{ category.title }}</a> {{ category.description?  ': ' ~ category.description : '' }}
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}

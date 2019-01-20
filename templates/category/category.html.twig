@@ -1,0 +1,15 @@
+{% extends 'category/index.html.twig' %}
+
+{% block container %}
+    <section>
+        <h1>Info: </h1>
+        <p><b>Title: </b> {{ category.title }}</p>
+        <p><b>Description: </b> {{ category.description|default('aucune description') }}</p>
+
+        <a href="{{ path('admin_modifyCategory', {id: category.id}) }}">Modify</a>
+        <a href="{{ path('admin_deleteCategory', {id: category.id}) }}">Delete</a>
+    </section>
+    <section>
+        <h1>Videos</h1>
+    </section>
+{% endblock %}
