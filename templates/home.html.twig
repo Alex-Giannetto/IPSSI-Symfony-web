@@ -4,7 +4,7 @@
     <div class="container">
         <ul>
             {% for video in videos %}
-                <li>{{ video.title }}</li>
+                {% include 'Components/video/video.html.twig' with {'video':video} %}
             {% endfor %}
         </ul>
     </div>

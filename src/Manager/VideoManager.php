@@ -38,4 +38,9 @@ class VideoManager
     {
         return $this->videoRepository->findBy(['published' => 1]);
     }
+
+    public function getVideoImage(): ?string
+    {
+
+    }
 }
