@@ -1,0 +1,1 @@
+#ViewVideoPage{display:grid;grid-template-columns:560px 1fr;grid-template:'title title' 'video description';}#ViewVideoPage .content{background-color:#ff6347}
