@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8"/>
+</head>
+<body>
+
+<h1 id="install">Install</h1>
+
+<p>Je n&#8217;utilise pas de docker mais le serveur interne de symfony + MAMP (BDD)</p>
+
+<ul>
+    <li>user bdd : root</li>
+    <li>password bdd: root</li>
+</ul>
+
+<h1 id="commandes">Commandes</h1>
+
+<p>Pour créer un utilisateur:</p>
+
+<pre><code class="bash">php bin/console create-admin {adresse-mail} {password}
+</code></pre>
+
+<p>Pour avoir le nombre de vidéo d&#8217;un utilisateur:</p>
+
+<pre><code class="bash">php bin/console count-videos-by-user {adresse-mail}
+</code></pre>
+
+</body>
+</html>
+
