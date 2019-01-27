@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Category;
 use App\Form\CategoryType;
 use App\Manager\CategoryManager;
+use App\Manager\VideoManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -33,6 +34,7 @@ class CategoryController extends AbstractController
         $category = $categoryManager->getCategoryById($id);
         return $this->render('category/category.html.twig', [
             'category' => $category,
+            'videos' => $category->getVideos()
         ]);
     }
 
@@ -106,4 +108,24 @@ class CategoryController extends AbstractController
         $this->addFlash('success', 'The ' . $category->getTitle() . ' category has been deleted');
         return $this->redirectToRoute('admin_categoryList');
     }
+
+    /**
+     * This page show contains all video for a category
+     * @Route("/categories/{id}", name="videoByCategories")
+     */
+    public function videoByCategories(
+        VideoManager $videoManager,
+        CategoryManager $categoryManager,
+        int $id
+    ) {
+        $category = $categoryManager->getCategoryById($id);
+        $videos = $category->getVideos();
+
+        return $this->render('category/home.html.twig', [
+            'category' => $category->getTitle(),
+            'videos' => $videos
+        ]);
+    }
+
+
 }

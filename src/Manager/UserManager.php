@@ -33,4 +33,9 @@ class UserManager
         return $this->userRepository->findAll();
     }
 
+    public function getUserbyEmail($email)
+    {
+        return $this->userRepository->findOneBy(['email' => $email]);
+    }
+
 }

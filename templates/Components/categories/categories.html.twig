@@ -1,0 +1,8 @@
+<div class="categories">
+    <ul>
+        {% for category in categories %}
+            <li><a class="btn  btn-outline-primary btn-sm"
+                   href="{{ path('videoByCategories', {id: category.id}) }}">#{{ category.title }}</a></li>
+        {% endfor %}
+    </ul>
+</div>

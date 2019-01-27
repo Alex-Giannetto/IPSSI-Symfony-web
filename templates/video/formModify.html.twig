@@ -1,0 +1,9 @@
+{% extends 'security/security.html.twig' %}
+
+{% block container %}
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    {{ form_end(form) }}
+
+    <a href="{{ path('deleteVideo', {id: video.id}) }}">Delete video</a>
+{% endblock %}

@@ -33,4 +33,5 @@ class CategoryManager
         return $this->categoryRepository->findAll();
     }
 
+
 }

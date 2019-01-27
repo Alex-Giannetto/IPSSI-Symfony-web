@@ -1,0 +1,49 @@
+#ViewVideoPage
+  width 100%
+  padding-top 20px
+
+  .content
+    display grid
+    width 100%
+    grid-template-columns 1fr 300px
+    grid-template-areas 'video video' 'title author' 'categories categories' 'description description'
+    grid-gap 20px
+
+    @media screen and (max-width: 800px)
+      grid-template-columns 1fr
+      grid-template-areas 'video video' 'title title' 'author author' 'categories categories' 'description description'
+
+
+    &__video
+      grid-area video
+      width 100%
+      height 600px
+      @media screen and (max-width: 800px)
+        height 50vw
+
+    &__title
+      grid-area title
+      @media screen and (max-width: 800px)
+        font-size 25px
+
+    &__categories
+      grid-area categories
+
+    &__author
+      grid-area author
+      display flex
+      justify-content flex-end
+      align-items center
+      font-size 25px
+      color grey
+      @media screen and (max-width: 800px)
+        font-size 15px
+        justify-content flex-start
+
+
+    &__description
+      grid-area description
+      font-size 20px
+      @media screen and (max-width: 800px)
+        font-size 14px
+

@@ -1,0 +1,11 @@
+{% extends 'video/index.html.twig' %}
+
+{% block containerFluid %}
+    <div class="container" id="HomePage">
+        <div class="videos">
+            {% for video in videos %}
+                {% include 'Components/video/video.html.twig' with {'video':video, 'modification': true} %}
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

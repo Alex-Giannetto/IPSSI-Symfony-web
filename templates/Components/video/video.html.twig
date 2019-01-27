@@ -1,3 +1,14 @@
-<div class="block block--video">
-    <h1>{{ video.title }}</h1>
+<div id="videoComponent">
+    <div class="block block--video" {% if video.published == false %}style="opacity: .5;"{% endif %}>
+        <a href="{{ path(modification? 'modifyVideo': 'viewVideo', {id: video.id}) }}">
+            <img class="block__image" src="{{ video.getYoutubeThumbnail() }}" width="100%"
+                 alt="Youtube thumbnail of {{ video.url }} video">
+            <h6 class="block__title">{{ video.title }}</h6>
+        </a>
+        <a class="block__author" href="{{ path('showUser', {id: video.author.id}) }}"
+           class="block--video__author">{{ video.author.username }}</a>
+        {% if modification %}
+            <a href="{{ path('deleteVideo', {id: video.id}) }}">Delete</a>
+        {% endif %}
+    </div>
 </div>

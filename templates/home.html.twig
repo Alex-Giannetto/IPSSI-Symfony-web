@@ -1,11 +1,13 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <div class="container">
-        <ul>
+    <div class="container" id="HomePage">
+        {% include 'Components/categories/categories.html.twig' with {'categories':categories} %}
+
+        <div class="videos">
             {% for video in videos %}
-                {% include 'Components/video/video.html.twig' with {'video':video} %}
+                {% include 'Components/video/video.html.twig' with {'video':video, 'modification':false} %}
             {% endfor %}
-        </ul>
+        </div>
     </div>
 {% endblock %}

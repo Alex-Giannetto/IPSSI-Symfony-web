@@ -8,6 +8,7 @@ use App\Form\UserAdminUpdateInfoType;
 use App\Form\UserRegisterType;
 use App\Form\UserUpdateInfoType;
 use App\Manager\UserManager;
+use App\Manager\VideoManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -89,14 +90,26 @@ class SecurityController extends AbstractController
     }
 
     /**
-     * @Route("/admin/user/{id}", name="admin_showUser")
+     * @Route("/user/{id}", name="showUser")
      */
-    public function showUser(Request $request, EntityManagerInterface $entityManager, UserManager $userManager, int $id)
-    {
+    public function showUser(
+        Request $request,
+        EntityManagerInterface $entityManager,
+        UserManager $userManager,
+        VideoManager $videoManager,
+        int $id
+    ) {
         $user = $userManager->getUserById($id);
 
+        if ($this->isGranted('ROLE_ADMIN')) {
+            $videos = $videoManager->getAllUserVideo($user);
+        } else {
+            $videos = $videoManager->getAllUserPulbicVideo($user);
+        }
+
         return $this->render('security/userInfo.html.twig', [
-            'user' => $user
+            'user' => $user,
+            'videos' => $videos ?? []
         ]);
     }
 
@@ -118,7 +131,7 @@ class SecurityController extends AbstractController
             $entityManager->flush();
 
             $this->addFlash('success', 'The ' . $user->getEmail() . '\'s informations has been modified');
-            return $this->redirectToRoute('admin_showUser', ['id' => $id]);
+            return $this->redirectToRoute('showUser', ['id' => $id]);
         }
         return $this->render('security/form.html.twig', [
             'form' => $form->createView()

@@ -11,8 +11,15 @@
                 <a class="nav-link" href="{{ path('home') }}">Home</a>
             </li>
             {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ path('addVideo') }}">Add video</a>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Video
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="{{ path('addVideo') }}">Add video</a>
+                        <a class="dropdown-item" href="{{ path('manageVideos') }}">Manage videos</a>
+                    </div>
                 </li>
                 {% if is_granted('ROLE_ADMIN') %}
                     <li class="nav-item dropdown">

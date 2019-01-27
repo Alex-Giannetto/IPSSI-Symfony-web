@@ -1,0 +1,24 @@
+{% extends 'video/index.html.twig' %}
+
+{% block container %}
+    <div id="ViewVideoPage">
+
+        <div class="content">
+            <iframe class="content__video"
+                    src="https://www.youtube-nocookie.com/embed/{{ video.getYoutubeId() }}?autoplay=1" frameborder="0"
+                    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen></iframe>
+            <h1 class="content__title">{{ video.title }}</h1>
+            <div class="content__categories">
+                {% include 'Components/categories/categories.html.twig' with {'categories':video.categories} %}
+            </div>
+
+            <a href="#" class="content__author">{{ video.author.username }}</a>
+            <p class="content__description">
+                {{ video.description }}
+            </p>
+
+
+        </div>
+    </div>
+{% endblock %}

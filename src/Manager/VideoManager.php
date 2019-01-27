@@ -3,6 +3,7 @@
 namespace App\Manager;
 
 use App\Entity\Category;
+use App\Entity\User;
 use App\Entity\Video;
 use App\Repository\VideoRepository;
 
@@ -34,13 +35,31 @@ class VideoManager
         return $this->videoRepository->findAll();
     }
 
+    /***
+     * return all video which are public
+     * @return array|null
+     */
     public function getAllPublicVideo(): ?array
     {
         return $this->videoRepository->findBy(['published' => 1]);
     }
 
-    public function getVideoImage(): ?string
+    /***
+     * return all user video
+     * @return array|null
+     */
+    public function getAllUserVideo(User $user): ?array
     {
-
+        return $this->videoRepository->findBy(['author' => $user->getId()]);
     }
+
+    /***
+     * return all user public video
+     * @return array|null
+     */
+    public function getAllUserPulbicVideo(User $user): ?array
+    {
+        return $this->videoRepository->findBy(['author' => $user->getId(), 'published' => 1]);
+    }
+
 }
